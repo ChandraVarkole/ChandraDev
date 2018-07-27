@@ -1,0 +1,18 @@
+.THIS .topHeader {
+    margin-bottom:20px;
+}
+
+.THIS .bordersec{
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 13px;
+    background: #fff;
+}
+
+.THIS .bordersec .slds-page-header{
+     background: #fff !important;
+}
+.THIS .pricebutton{
+
+   
+}

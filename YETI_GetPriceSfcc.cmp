@@ -1,0 +1,50 @@
+<aura:component controller="YETI_GetPriceSfccController">
+    <aura:attribute name="GetPrice" type="decimal"/>
+    <aura:attribute name="SelectedProducts" type="List"/>
+   <div class="slds-form-element slds-lookup slds-is-close">
+        
+        <!--This part is for display search bar for lookup-->  
+        <div class="slds-form-element__control">
+            <div class="slds-input-has-icon slds-input-has-icon--right">
+                <div aura:id="lookup-pill" class="slds-pill-container">
+                    <div aura:id="lookupField" class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"  style="width: 10%;">
+                        
+                        <ui:inputText class="slds-lookup__search-input slds-input inputSize"
+                                      value="{!v.GetPrice}"
+                                      placeholder="Price of Product"/>
+                        
+                        <span class="slds-icon_container slds-icon-utility-search slds-input__icon slds-input__icon_right">
+                            <lightning:icon iconName="utility:search" size="x-small" alternativeText="icon" />
+                        </span>
+                    </div> 
+                    
+                </div>
+            </div>
+        </div>
+   <div class="c-container">
+        
+            <aura:iteration items="{!v.GetPrice.hits}" var="prod">
+              
+                    <div class="slds-box">
+                        
+                            <aura:set attribute="actions">
+                                
+                            </aura:set>
+                           
+                            <aura:set attribute="footer">
+                                <div class="">
+                                    <aura:if isTrue="{!not(empty(prod.price))}">
+                                        Price Range - {!prod.currency}&nbsp;{!prod.price} 
+                                        <aura:set attribute="else">
+                                            Price - {!prod.currency}&nbsp;{!prod.price}
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                            </aura:set>
+                        
+                    </div>
+        
+            </aura:iteration>
+       </div>  
+    </div>
+  </aura:component>

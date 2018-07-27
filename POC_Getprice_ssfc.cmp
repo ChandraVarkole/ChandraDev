@@ -1,0 +1,141 @@
+<aura:component controller="POC_getPriceSsfcController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="productList" type="object"/>
+    <aura:attribute name="orignalList" type="object"/>
+    <aura:attribute name="Subtotal" type="Integer"/>
+    <aura:attribute name="DiscuountItems" type="Integer"/>
+    <aura:attribute name="Tax" type="Integer"/>
+    <aura:attribute name="ShippingCost" type="Integer"/>
+    <aura:attribute name="Total" type="Integer"/>
+    <lightning:spinner alternativeText="Loading" size="medium" aura:id="spinner" />
+    <div class="slds">
+        <div class="topHeader">
+            <div class="slds-grid container">
+                <div class="slds-col slds-size_1-of-1 slds-large-size_8-of-12">
+                    <div class="slds-page-header">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-opportunity" title="Description of icon when needed">
+                                    <lightning:avatar src="/docs/component-library/app/images/examples/avatar1.jpg" initials="BW" fallbackIconName="standard:person_account" alternativeText="Bob Wilson"/>
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Rohde Corp - 80,000 Widgets">Order</h1>
+                                <p class="slds-text-body_small slds-line-height_reset">
+                                    Jolen Solutions
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-large-size_4-of-12">
+                    <div class="slds-grid slds-grid_vertical-reverse" >
+                        <div class="slds-col">
+                            <span>Subtotal : {!v.Subtotal}</span>
+                        </div>
+                        <div class="slds-col">
+                            <span>Discuount Items : {!v.DiscuountItems}</span>
+                        </div>
+                        <div class="slds-col">
+                            <span>Tax: {!v.Tax}</span>
+                        </div>
+                        <div class="slds-col">
+                            <span>Shipping Cost : {!v.ShippingCost }</span>
+                        </div>
+                        <div class="slds-col">
+                            <span>Total : {!v.Total}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navTop">
+            <div class="slds-context-bar">
+                
+                <nav class="slds-context-bar__secondary" role="navigation">
+                    <ul class="slds-grid">
+                        <li class="slds-context-bar__item slds-is-active">
+                            <a href="javascript:void(0);" class="slds-context-bar__label-action" title="Home">
+                                <span class="slds-assistive-text">Current Page:</span>
+                                <span class="slds-truncate" title="Home">Order</span>
+                            </a>
+                        </li>
+                        
+                        <li class="slds-context-bar__item">
+                            <a href="javascript:void(0);" class="slds-context-bar__label-action" title="Menu Item">
+                                <span class="slds-truncate" title="Menu Item">Item</span>
+                            </a>
+                        </li>
+                        <li class="slds-context-bar__item">
+                            <a href="javascript:void(0);" class="slds-context-bar__label-action" title="Menu Item">
+                                <span class="slds-truncate" title="Menu Item">Shipping</span>
+                            </a>
+                        </li>
+                        <li class="slds-context-bar__item">
+                            <a href="javascript:void(0);" class="slds-context-bar__label-action" title="Menu Item">
+                                <span class="slds-truncate" title="Menu Item">Billing</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-1">
+            <br/>
+            <lightning:button label="Get Prices" title="Get Prices" onclick="{! c.getPricesController}" class="pricebutton"/>
+            <br/><br/>
+            
+        </div>
+        <aura:iteration items="{!v.productList}" var="prod">
+            <div class="slds-grid container bordersec">
+                <div class="slds-col slds-size_1-of-1 slds-large-size_8-of-12">
+                    <div class="slds-page-header">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-opportunity" title="Description of icon when needed">
+                                    <lightning:icon iconName="doctype:image" alternativeText="Doc image" />
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Rohde Corp - 80,000 Widgets">
+                                    {!prod.product_name}
+                                </h1>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-large-size_4-of-12">
+                    <div class="slds-grid slds-grid_vertical-reverse" >
+                        
+                        
+                        
+                        
+                        <div class="slds-col">
+                            <span>Total : </span>
+                        </div>
+                        <div class="slds-col">
+                            <span>Discount :10 </span>
+                        </div>
+                        <div class="slds-col">
+                            <span>Tax:10 </span>
+                        </div>
+                        <div class="slds-col">
+                            <span>Amount : {!prod.price}</span>
+                            
+                        </div>
+                        <div class="slds-col">  
+                            <div class="slds-grid">
+                                <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12" style="    line-height: 61px;">Quantity :</div>
+                                <div class="slds-col slds-size_1-of-1 slds-large-size_4-of-12">
+                                    <lightning:input type="number" name="input1" />   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aura:iteration>
+    </div>
+</aura:component>
